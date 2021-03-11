@@ -5,16 +5,16 @@
   		<meta name="viewport" content="width=device-width, initial-scale=1">
   		<title>Website name</title>
   		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  		<script>
-	  		$(function(){
-	  			document.getElementById("includedContent").innerHTML='<object-data="navbar.html">';
-	  		});
-  		</script>
 	</head>
 
 	<body>
 		<header>
-			<div id="includedContent"></div>
+			<div id="nav-placeholder"></div>
 		</header>
+		<script>
+	  		$(function(){
+  				$("#nav-placeholder").load("navbar.html");
+			});
+  		</script>
 	</body>
 </html>

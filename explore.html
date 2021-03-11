@@ -4,23 +4,31 @@
 		<meta charset="utf-8">
   		<meta name="viewport" content="width=device-width, initial-scale=1">
   		<title>Website name</title>
-
+  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   		<style>
   			.grid-container {
   				display: grid;
-  				background-color: blue;
+  				background-color: #2196F3;
   				grid-gap: 10px;
   				padding: 10px;
   			}
   			.grid-container > div {
   				padding: 20px 0;
-  				background-color: red;
+  				background-color: rgba(255, 255, 255, 0.8);
   				font-size: 30px;
   			}
   		</style>
 	</head>
 
 	<body>
+		<header>
+			<div id="nav-placeholder"></div>
+		</header>
+		<script>
+	  		$(function(){
+  				$("#nav-placeholder").load("navbar.html");
+			});
+  		</script>
 		<div>
 			<input id="search-bar" type="text" placeholder="Search for a book...">
 			<p>
