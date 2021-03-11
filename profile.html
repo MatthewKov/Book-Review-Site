@@ -36,7 +36,7 @@
 
 	<body>
 		<header>
-			<div id="includedContent"></div>
+			<div id="nav-placeholder"></div>
 		</header>
 
 		<div id="person-info">
@@ -69,5 +69,10 @@
 				<input type="text" placeholder="Add a book"> & <input type="text" placeholder="Add author">
 			</div>
 		</div>
+		<script>
+	  		$(function(){
+  				$("#nav-placeholder").load("navbar.html");
+			});
+  		</script>
 	</body>
 </html>

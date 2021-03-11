@@ -4,23 +4,56 @@
 		<meta charset="utf-8">
   		<meta name="viewport" content="width=device-width, initial-scale=1">
   		<title>Website name</title>
-
+  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   		<style>
   			.grid-container {
   				display: grid;
-  				background-color: blue;
+  				background-color: #2196F3;
   				grid-gap: 10px;
   				padding: 10px;
   			}
   			.grid-container > div {
   				padding: 20px 0;
-  				background-color: red;
+  				background-color: rgba(255, 255, 255, 0.8);
   				font-size: 30px;
   			}
+  			.item1 { grid-area: book-image; }
+			.item2 { grid-area: header-info; }
+			.item3 { grid-area: rating; }
+			.item4 { grid-area: book-review; }
+			.item5 { grid-area: reactions; }
+
+			.post-container {
+  				display: grid;
+  				grid-template-areas:
+    				'book-image header-info header-info header-info header-info header-info'
+    				'book-image rating rating rating rating rating'
+    				'book-image book-review book-review book-review book-review book-review'
+    				'book-image reactions reactions reactions reactions reactions';
+  				grid-gap: 10px;
+  				background-color: #2196F3;
+  				padding: 10px;
+			}
+
+		.post-container > div {
+  			background-color: rgba(255, 255, 255, 0.8);
+  			text-align: center;
+  			padding: 20px 0;
+  			font-size: 30px;
+		}
   		</style>
 	</head>
 
 	<body>
+		<header>
+			<div id="nav-placeholder"></div>
+		</header>
+		<script>
+	  		$(function(){
+  				$("#nav-placeholder").load("navbar.html");
+			});
+  		</script>
 		<div>
 			<input id="search-bar" type="text" placeholder="Search for a book...">
 			<p>
@@ -35,15 +68,24 @@
 			</p>
 		</div>
 		<div class="grid-container">
-		  <div class="grid-item">1</div>
+		  <div class="post-container">
+		  	<div class="item1">Book Img</div>	
+  			<div class="item2">louisaevola reviewed Educated by Tara Westover</div>	
+  			<div class="item3">
+  				<span class="fa fa-star checked"></span>
+				<span class="fa fa-star checked"></span>
+				<span class="fa fa-star checked"></span>
+				<span class="fa fa-star"></span>
+				<span class="fa fa-star"></span>
+  			</div>
+  			<div class="item4">Enthralling book about a peculiar childhood! A must read memoir.</div>
+  			<div class="item5">
+  				<input id="reaction" type="text" placeholder="type a comment...">
+  				<span class="far fa-bookmark"></span>
+  			</div>
+		  </div>
 		  <div class="grid-item">2</div>
 		  <div class="grid-item">3</div>
-		  <div class="grid-item">4</div>
-		  <div class="grid-item">5</div>
-		  <div class="grid-item">6</div>
-		  <div class="grid-item">7</div>
-		  <div class="grid-item">8</div>
-		  <div class="grid-item">9</div>
 		</div>
 
 	</body>
