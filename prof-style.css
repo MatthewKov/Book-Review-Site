@@ -7,20 +7,9 @@
   display: inline-grid;
 }
 
-#person-info {
-  display: block;
-  margin: auto;      
-  width: 50%;
-}
-
-#links {
-  display: block;
-  margin: auto;
-  width: 50%;
-}
-
 .flex-container {
   display: flex;
+  padding: 50px;
 }
 
 .flex-child {
@@ -31,4 +20,20 @@
   color: crimson;
   font-style: italic;
   padding: 10px;
+}
+
+#user{
+  display: block;
+  margin: auto;      
+  width: 10%;
+/*  padding: 30px;*/
+}
+
+#bio {
+  width: 300px;
+  border: solid black 2px;
+  padding: 10px;
+  display: block;
+  margin: auto;      
+
 }
