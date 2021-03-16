@@ -1,3 +1,4 @@
+.header {grid-area: title;}
 .item1 { grid-area: book-image; }
 .item2 { grid-area: book-title; }
 .item3 { grid-area: book-author; }
@@ -7,18 +8,45 @@
 .grid-container {
   display: grid;
   grid-template-areas:
+    'title title title title title title'
     'book-image book-title book-title book-title book-title book-title'
     'book-image book-author book-author book-author book-author book-author'
     'book-image book-rating book-rating book-rating book-rating book-rating'
     'explanation explanation explanation explanation explanation explanation';
   grid-gap: 10px;
   /*background-color: #2196F3;*/
-  padding: 10px;
+  padding: 15px;
+  border: solid black 2px;
+  margin-left:100px;
+  margin-right:100px;
+  margin-top:20px;
+  margin-bottom: 40px;
 }
 
 .grid-container > div {
   /*background-color: rgba(255, 255, 255, 0.8);*/
-  text-align: center;
-  padding: 20px 0;
-  font-size: 30px;
+  font-size: 20px;
+}
+
+#book-img-upload{
+  border: solid black 2px;
+  padding-top:25px;
+}
+
+#outer-shell{
+  padding-left:10px;
+}
+
+#publish-btn{
+  margin-left:650px;
+}
+
+#description {
+  height:150px;
+}
+
+.error_message {
+  color: crimson;
+  font-style: italic;
+  padding: 10px;
 }
