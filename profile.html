@@ -5,6 +5,40 @@
   		<meta name="viewport" content="width=device-width, initial-scale=1">
   		<title>Website name</title>
   		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+  		<script>
+	  		$(function(){
+	  			document.getElementById("includedContent").innerHTML='<object-data="navbar.html">';
+	  		});
+  		</script>
+
+  		<style>
+  			.boxed {
+  				border: 1px solid gray;
+  			}
+
+  			.grid-container {
+  				display: inline-grid;
+  			}
+
+  			#person-info {
+  				margin: 0px auto;
+  			}
+
+  			.flex-container {
+  				display: flex;
+  			}
+
+  			.flex-child {
+  				flex: 1;
+  			}
+
+  			.error_message {
+  				color: crimson;
+  				font-style: italic;
+  				padding: 10px;
+  			}
+  		</style>
 	</head>
 
 	<body>
@@ -17,6 +51,7 @@
 			<label for="profile-pic">username</label> <br/>
 			<span id="bio" class="boxed">Here is where the bio goes</span>
 			<p id="links">
+			<p>
 				<a href=“my_reviews.html”>My reviews</a>
 				<a href=“my_bookshelf.html”>My bookshelf</a>
 			</p>
@@ -30,7 +65,9 @@
 						Title by Author
 					</li>
 				</ul>
-				<input type="text" placeholder="Add a book"> & <input type="text" placeholder="Add author">
+				<input id="title_read" type="text" placeholder="Add a book"> & <input id="author_read" type="text" placeholder="Add author">
+				<button id="add_read" class="btn btn-primary" onclick="addBookRead()">Add to list</button>
+				<div><span class="error_message" id="err_read"></span></div>
 			</div>
 			<div class="flex-child">
 				<h4>Books I want to read</h4>
@@ -39,13 +76,117 @@
 						Title by Author
 					</li>
 				</ul>
-				<input type="text" placeholder="Add a book"> & <input type="text" placeholder="Add author">
+				<input id="title_to_read" type="text" placeholder="Add a book"> & <input id="author_to_read" type="text" placeholder="Add author">
+				<button id="add_to_read" class="btn btn-primary" onclick="addBookToRead()">Add to list</button>
+				<div><span class="error_message" id="err_to_read"></span></div>
 			</div>
 		</div>
 		<script>
 	  		$(function(){
   				$("#nav-placeholder").load("navbar.html");
 			});
+
+			var profile = {
+				readList: [],
+				toReadList: []
+			};
+
+			function addBookRead() {
+				var title = document.getElementById("title_read").value;
+				var author = document.getElementById("author_read").value;
+				if(title !== "" && author !== "") {
+					if(checkBookExists(author, title, profile.readList)) {
+						document.getElementById("err_read").innerHTML = "This list already contains that book";
+					}
+					else {
+						document.getElementById("err_read").innerHTML = "";
+						var list = document.getElementById("books-read");
+						var newBook = document.createElement("li");
+						newBook.appendChild(document.createTextNode(title + " by " + author));
+						newBook.setAttribute("id", title + "-" + author);
+						var delButton = document.createElement("input");
+						delButton.setAttribute("type", "button");
+						delButton.setAttribute("value", "Remove");
+						delButton.setAttribute("onclick", "deleteBook()");
+						delButton.onclick = deleteBook.bind(this, [author, title, "readList"]);
+						newBook.appendChild(delButton);
+						list.appendChild(newBook);
+						profile.readList.push({
+							author: author,
+							title: title
+						});
+						console.log(profile.readList);
+					}
+				}
+				else {
+					document.getElementById("err_read").innerHTML = "Error: missing field(s)";
+				}
+			}
+
+			function addBookToRead() {
+				var title = document.getElementById("title_to_read").value;
+				var author = document.getElementById("author_to_read").value;
+				if(title !== "" && author !== "") {
+					if(checkBookExists(author, title, profile.toReadList)) {
+						document.getElementById("err_to_read").innerHTML = "This list already contains that book";
+					}
+					else {
+						var list = document.getElementById("books-to-read");
+						var newBook = document.createElement("li");
+						newBook.appendChild(document.createTextNode(title + " by " + author));
+						newBook.setAttribute("id", title + "-" + author);
+						var delButton = document.createElement("input");
+						delButton.setAttribute("type", "button");
+						delButton.setAttribute("value", "Remove");
+						delButton.setAttribute("onclick", "deleteBook()");
+						delButton.onclick = deleteBook.bind(this, [author, title, "toReadList"]);
+						newBook.appendChild(delButton);
+						list.appendChild(newBook);
+						profile.toReadList.push({
+							author: author,
+							title: title
+						});
+						console.log(profile.toReadList);
+					}
+				}
+				else {
+					document.getElementById("err_to_read").innerHTML = "Error: missing field(s)";
+				}
+			}
+
+			function checkBookExists(author, title, list) {
+				for(var i = 0; i < list.length; i++) {
+					if(list[i].author.toLowerCase() == author.toLowerCase() && list[i].title.toLowerCase() == title.toLowerCase()) {
+						return true;
+					}
+				}
+				return false;
+			}
+
+			/*
+			* args[0] = author
+			* args[1] = title
+			* args[2] = string designating which list to update
+			*/
+			function deleteBook(args) {
+				if(args[2] === "readList") {
+					profile.readList = profile.readList.filter((book) => { return book.author != args[0] && book.title != args[1]});
+					var list = document.getElementById("books-read")
+					var delID = args[1] + "-" + args[0];
+					var delNode = document.getElementById(delID);
+					list.removeChild(delNode);
+					console.log(profile.readList);
+				}
+				else if(args[2] === "toReadList") {
+					profile.toReadList = profile.toReadList.filter((book) => { return book.author != args[0] && book.title != args[1]});
+					var list = document.getElementById("books-to-read")
+					var delID = args[1] + "-" + args[0];
+					var delNode = document.getElementById(delID);
+					list.removeChild(delNode);
+					console.log(profile.toReadList);
+				}
+			}
+
   		</script>
 	</body>
 		<style>
