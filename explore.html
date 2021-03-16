@@ -5,7 +5,7 @@
   		<meta name="viewport" content="width=device-width, initial-scale=1">
   		<title>Website name</title>
   		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  		<script src="https://kit.fontawesome.com/595acf0be0.js" crossorigin="anonymous"></script>
   		<link rel="stylesheet" href="explore-style.css">
 	</head>
 
@@ -18,9 +18,13 @@
   				$("#nav-placeholder").load("navbar.html");
 			});
   		</script>
-		<div>
-			<input id="search-bar" type="text" placeholder="Search for a book...">
-			<p>
+		<div id="filtering">
+			<div class="wrapper">
+				
+				<input id="search-bar" type="text" placeholder="Search for a book...">
+				<i class="fa fa-search" id="search-icon"></i>
+			</div>
+			<p class=links>
 				<a href=“horror_genre.html”>classic</a>
 				<a href=“romance_genre.html”>horror</a>
 				<a href=“romance_genre.html”>memoir</a>
@@ -31,10 +35,12 @@
 				<a href=“romance_genre.html”>thriller</a>
 			</p>
 		</div>
+		<div id="outer-shell">
+		<!-- First Hardcoded Post -->
 		<div class="grid-container">
 		  <div class="post-container">
-		  	<div class="item1"><img src="educated.jpg" alt="Educated" style="width:100px;height:150px;""></div>	
-  			<div class="item2">louisaevola reviewed Educated by Tara Westover</div>	
+		  	<div class="item1"><img src="educated.jpg" alt="Educated" style="width:100px;height:165px;"></div>	
+  			<div class="item2"><b>louisaevola100</b> reviewed <b>Educated</b> by <b>Tara Westover</b></div>	
   			<div class="item3">
   				<span class="fa fa-star checked"></span>
 				<span class="fa fa-star checked"></span>
@@ -44,13 +50,78 @@
   			</div>
   			<div class="item4">Enthralling book about a peculiar childhood! A must read memoir.</div>
   			<div class="item5">
-  				<input id="reaction" type="text" placeholder="type a comment...">
-  				<span class="far fa-bookmark"></span>
+  				<input id="reaction" type="text" placeholder="type a comment..."><button type="button" id="submit" class="btn btn-outline-info">Submit  
+  				</button></input>
+  				<br/>
+  				<i id="like" class="far fa-heart"></i>
   			</div>
 		  </div>
-		  <div class="grid-item">2</div>
-		  <div class="grid-item">3</div>
+
+		  <!-- Second Hardcoded Post -->
+		  <div class="grid-container">
+		  <div class="post-container">
+		  	<div class="item1"><img src="light-book.jpg" alt="All the Light We Cannot See" style="width:100px;height:165px;"></div>	
+  			<div class="item2"><b>matthewkovalenko</b> reviewed <b>All the Light We Cannot See</b> by <b>Anthony Doerr</b></div>	
+  			<div class="item3">
+  				<span class="fa fa-star checked"></span>
+				<span class="fa fa-star checked"></span>
+				<span class="fa fa-star checked"></span>
+				<span class="fa fa-star"></span>
+				<span class="fa fa-star-half-alt"></span>
+  			</div>
+  			<div class="item4">Really well written book that weaves fiction and history.</div>
+  			<div class="item5">
+  				<input id="reaction" type="text" placeholder="type a comment..."><button type="button" id="submit" class="btn btn-outline-info">Submit  
+  				</button></input>
+  				<br/>
+  				<i id="like" class="far fa-heart"></i>
+  			</div>
+		  </div>
+
+		  <!-- Third Hardcoded Post -->
+		  <div class="grid-container">
+		  <div class="post-container">
+		  	<div class="item1"><img src="in-the-time.jpg" alt="In the Time of the Butterflies" style="width:100px;height:165px;"></div>	
+  			<div class="item2"><b>user4578475</b> reviewed <b>In the Time of the Butterflies</b> by <b>Julia Alvarez</b></div>	
+  			<div class="item3">
+  				<span class="fa fa-star checked"></span>
+				<span class="fa fa-star checked"></span>
+				<span class="fa fa-star"></span>
+				<span class="fa fa-star"></span>
+				<span class="fa fa-star"></span>
+  			</div>
+  			<div class="item4">An amazing book about sisterhood and family inspired by true events.</div>
+  			<div class="item5">
+  				<input id="reaction" type="text" placeholder="type a comment..."><button type="button" id="submit" class="btn btn-outline-info">Submit  
+  				</button></input>
+  				<br/>
+  				<i id="like" class="far fa-heart"></i>
+  			</div>
+		  </div>
 		</div>
+
+		<!-- Fourth Hardcoded Post -->
+		<div class="grid-container">
+		  <div class="post-container">
+		  	<div class="item1"><img src="crazy-rich-asians.jpg" alt="Crazy Rich Asians" style="width:100px;height:165px;"></div>	
+  			<div class="item2"><b>newuser</b> reviewed <b>Crazy Rich Asians</b> by <b>Kevin Kwan</b></div>	
+  			<div class="item3">
+  				<span class="fa fa-star checked"></span>
+				<span class="fa fa-star checked"></span>
+				<span class="fa fa-star checked"></span>
+				<span class="fa fa-star"></span>
+				<span class="far fa-star"></span>
+  			</div>
+  			<div class="item4">Better than the movie, which is saying a lot!</div>
+  			<div class="item5">
+  				<input id="reaction" type="text" placeholder="type a comment..."><button type="button" id="submit" class="btn btn-outline-info">Submit  
+  				</button></input>
+  				<br/>
+  				<i id="like" class="far fa-heart"></i>
+  			</div>
+		  </div>
+		</div>
+	</div>
 
 	</body>
 </html>

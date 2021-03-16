@@ -1,13 +1,12 @@
 .grid-container {
   display: grid;
-  background-color: #2196F3;
+  /*background-color: #2196F3;*/
   grid-gap: 10px;
-  padding: 10px;
+  /*padding: 10px;*/
 }
 .grid-container > div {
-  padding: 20px 0;
+  /*padding: 0px 10px;*/
   background-color: rgba(255, 255, 255, 0.8);
-  font-size: 10px;
 }
   .item1 { grid-area: book-image; }
 	.item2 { grid-area: header-info; }
@@ -22,14 +21,71 @@
     	'book-image rating rating rating rating rating'
     	'book-image book-review book-review book-review book-review book-review'
     	'book-image reactions reactions reactions reactions reactions';
-  	grid-gap: 10px;
-  	background-color: #2196F3;
-  	padding: 10px;
+  	/*grid-gap: 10px;*/
+  	/*background-color: #2196F3;*/
+    border: solid black 2px;
+    width:90%;
 }
 
 .post-container > div {
-  background-color: rgba(255, 255, 255, 0.8);
-  text-align: center;
-  padding: 20px 0;
-  font-size: 10px;
+  /*background-color: rgba(255, 255, 255, 0.8);*/
+  /*text-align: center;*/
+  /*padding-left: 20px;*/
+  font-size: 15px;
+
+}
+
+#outer-shell {
+  display: block;
+  margin: auto;      
+  width: 80%;
+}
+
+#filtering {
+  display: block;
+  margin: auto;      
+  width: 80%;
+}
+
+#search-bar {
+    border: 1px solid grey;
+    border-radius: 5px;
+    height: 40px;
+    width: 70%;
+    padding: 2px 20px 2px 30px;
+    outline: 0;
+    background-color: #f5f5f5;
+  }
+
+.wrapper {
+    padding: 30px 2px 2px 100px;
+    display: block;
+    margin: auto;      
+    width: 70%;
+}
+
+.links {
+  display: block;
+  margin: auto;      
+  width: 70%;
+  padding: 2px 2px 20px 112px;
+}
+
+.links > a {
+  text-decoration: none;
+  padding-left: 2px;
+}
+.links > a:hover {
+  color:hotpink;
+}
+
+#like {
+  margin-top: 10px;
+  padding: 4px 2px 5px 2px;
+}
+
+#submit {
+  margin-left: 12px;
+  font-size: 12px;
+  padding: 2px 2px 2px 2px;
 }
