@@ -1,0 +1,35 @@
+.grid-container {
+  display: grid;
+  background-color: #2196F3;
+  grid-gap: 10px;
+  padding: 10px;
+}
+.grid-container > div {
+  padding: 20px 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  font-size: 30px;
+}
+  .item1 { grid-area: book-image; }
+	.item2 { grid-area: header-info; }
+	.item3 { grid-area: rating; }
+	.item4 { grid-area: book-review; }
+	.item5 { grid-area: reactions; }
+
+.post-container {
+    display: grid;
+  	grid-template-areas:
+    	'book-image header-info header-info header-info header-info header-info'
+    	'book-image rating rating rating rating rating'
+    	'book-image book-review book-review book-review book-review book-review'
+    	'book-image reactions reactions reactions reactions reactions';
+  	grid-gap: 10px;
+  	background-color: #2196F3;
+  	padding: 10px;
+}
+
+.post-container > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
+}

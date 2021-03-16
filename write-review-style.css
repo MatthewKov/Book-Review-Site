@@ -1,0 +1,24 @@
+.item1 { grid-area: book-image; }
+.item2 { grid-area: book-title; }
+.item3 { grid-area: book-author; }
+.item4 { grid-area: book-rating; }
+.item5 { grid-area: explanation; }
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'book-image book-title book-title book-title book-title book-title'
+    'book-image book-author book-author book-author book-author book-author'
+    'book-image book-rating book-rating book-rating book-rating book-rating'
+    'explanation explanation explanation explanation explanation explanation';
+  grid-gap: 10px;
+  background-color: #2196F3;
+  padding: 10px;
+}
+
+.grid-container > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
+}
