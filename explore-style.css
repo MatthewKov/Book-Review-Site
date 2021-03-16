@@ -94,3 +94,9 @@
   font-size: 12px;
   padding: 2px 2px 2px 2px;
 }
+
+#err_search {
+  color: crimson;
+  font-style: italic;
+  padding: 10px;
+}

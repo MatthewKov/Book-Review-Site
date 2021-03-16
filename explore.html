@@ -8,7 +8,6 @@
   		<script src="https://kit.fontawesome.com/595acf0be0.js" crossorigin="anonymous"></script>
   		<link rel="stylesheet" href="explore-style.css">
 	</head>
-
 	<body>
 		<header>
 			<div id="nav-placeholder"></div>
@@ -21,7 +20,8 @@
 		<div id="filtering">
 			<div class="wrapper">
 				<input id="search-bar" type="text" placeholder="Search for a book...">
-				<i class="fa fa-search" id="search-icon"></i>
+				<button class="btn" onclick="search()"><i class="fa fa-search" id="search-icon"></i></button><br>
+				<div><span class="err_search" id="err_search"></span></div>
 			</div>
 			<p class=links>
 				<a href=“horror_genre.html”>classic</a>
@@ -122,8 +122,16 @@
 		</div>
 	</div>
 	<script>
-		// function likePost() {
-		// 	var heart = document.getElementById("book-title").value;
+		function search() {
+			var searchBar = document.getElementById("search-bar").value;
+			console.log(searchBar);
+			if(searchBar == "") {
+				document.getElementById("err_search").innerHTML = "please enter a title or author to search";
+			}
+			else {
+				document.getElementById("err_search").innerHTML = "";	
+			}
+		}	
 	</script>
 	</body>
 </html>
