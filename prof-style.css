@@ -1,0 +1,34 @@
+
+.boxed {          
+  border: 1px solid gray;
+}
+
+.grid-container {
+  display: inline-grid;
+}
+
+#person-info {
+  display: block;
+  margin: auto;      
+  width: 50%;
+}
+
+#links {
+  display: block;
+  margin: auto;
+  width: 50%;
+}
+
+.flex-container {
+  display: flex;
+}
+
+.flex-child {
+  flex: 1;
+}
+
+.error_message {
+          color: crimson;
+          font-style: italic;
+          padding: 10px;
+}
