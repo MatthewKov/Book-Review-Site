@@ -84,6 +84,11 @@
   padding: 4px 2px 5px 2px;
 }
 
+.fa-heart:hover{
+   color:red !important;
+}
+
+
 #submit {
   margin-left: 12px;
   font-size: 12px;

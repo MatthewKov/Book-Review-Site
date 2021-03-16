@@ -5,7 +5,7 @@
   		<meta name="viewport" content="width=device-width, initial-scale=1">
   		<title>Website name</title>
   		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  		<script src="https://kit.fontawesome.com/595acf0be0.js" crossorigin="anonymous"></script>
       <link rel="stylesheet" href="write-review-style.css">
 </head>
 <body>
@@ -16,26 +16,42 @@
   		$(function(){  				
   			$("#nav-placeholder").load("navbar.html");
 		});
-  	</script>
+  </script>
   	<br>
-	<h1>review your latest read!</h1>
 
+  <div class="outer-shell">
 	<div class="grid-container">
-  		<div class="item1">Book Img</div>	
-  		<input class="item2" id="search-bar" type="text" placeholder="Book title...">
-  		<input class="item3" id="search-bar" type="text" placeholder="Book author...">
+      <div class="title"><p>review your latest read! </p></div>
+  		<div class="item1" id="book-img-upload"><i class="far fa-images fa-2x"></i><br/><input type="file" id="img" name="img" accept="image/*"></div>	
+  		<input class="item2" id="book-title" type="text" placeholder="Book title...">
+  		<input class="item3" id="book-author" type="text" placeholder="Book author...">
   		<div class="item4">
   			<p>rating out of 5 stars...</p>
-  			<span class="fa fa-star checked"></span>
-			<span class="fa fa-star checked"></span>
-			<span class="fa fa-star checked"></span>
-			<span class="fa fa-star"></span>
-			<span class="fa fa-star"></span>
+  			<span class="far fa-star"></span>
+			<span class="far fa-star"></span>
+			<span class="far fa-star"></span>
+			<span class="far fa-star"></span>
+			<span class="far fa-star"></span>
   		</div>
   		<input class="item5" id="description" type="text" placeholder="descriptions, thoughts, words of praise...">
 	</div>
 	<div>
-		<button class="btn btn-primary" type="submit">publish post!</button>
+		<button class="btn btn-primary" id="publish-btn" onclick="publishPost()" type="submit">publish post!</button>
 	</div>
+</div>
+<div><span class="error_message" id="err_read"></span></div>
+<script>
+  function publishPost() {
+    var title = document.getElementById("book-title").value;
+    var author = document.getElementById("book-author").value;
+    var description = document.getElementById("description").value;
+      if(title !== "" && author !== "" && description !== "") {
+          document.getElementById("err_read").innerHTML = "success: post published!";
+      }
+      else {
+        document.getElementById("err_read").innerHTML = "error: missing field(s); couldn't publish post";
+      }
+    }
+  </script>
 </body>
 </html>
