@@ -12,7 +12,7 @@ $dsn = "mysql:host=$hostname;dbname=$dbname";
 try 
 {
    $db = new PDO($dsn, $username, $password);
-   echo "<p>You are connected to the database</p>";
+   //echo "<p>You are connected to the database</p>";
 }
 catch (PDOException $e) 
 {

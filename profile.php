@@ -3,6 +3,9 @@
 
 <?php
 	session_start();
+	if(!isset($_SESSION['user'])) {
+		header('Location: login.php');
+	}
 	require('db_connect.php');
 
 	function addBookToList($list, $title, $author, $user) {
@@ -139,7 +142,6 @@
 	$to_read_statement->execute();
 	$books_to_read_list = $to_read_statement->fetchAll();
 	$to_read_statement->closeCursor();
-	
 
 ?>
 
@@ -214,7 +216,7 @@
 
 		<script>
 	  		$(function(){
-  				$("#nav-placeholder").load("navbar.html");
+  				$("#nav-placeholder").load("navbar.php");
 			});
   		</script>
 	</body>

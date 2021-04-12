@@ -1,5 +1,16 @@
 <!DOCTYPE html>
 <!-- Contributions by Louisa Evola and Matthew Kovalenko-->
+<?php
+	session_start();
+	if(!isset($_SESSION['user'])) {
+		header('Location: login.php');
+	}
+	require('db_connect.php');
+	//put all php code below here
+	
+
+?>
+
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -15,7 +26,7 @@
 		</header>
 		<script>
 	  		$(function(){
-  				$("#nav-placeholder").load("navbar.html");
+  				$("#nav-placeholder").load("navbar.php");
 			});
   		</script>
 		<div id="filtering">

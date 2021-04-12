@@ -1,4 +1,8 @@
 <?php
+session_start();
+if(!isset($_SESSION['user'])) {
+  header('Location: login.php');
+}
 require('db_connect.php');
 
 $booktitle = $bookauthor = $rating = $description = $genre = NULL;
@@ -108,7 +112,7 @@ else {
 	</header>
 	<script>
   		$(function(){  				
-  			$("#nav-placeholder").load("navbar.html");
+  			$("#nav-placeholder").load("navbar.php");
 		});
   </script>
   	<br>

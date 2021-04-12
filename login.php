@@ -45,7 +45,7 @@
             if(password_verify($pwd, $pass)) {
               session_start();
               $_SESSION['user'] = $usr;
-              header('Location: profile.php');
+              header('Location: explore.php');
             }
             else {
               $_POST['err_pass'] = "Incorrect password";

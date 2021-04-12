@@ -1,5 +1,12 @@
 <!DOCTYPE html>
 <!-- Contributions by Louisa Evola and Matthew Kovalenko-->
+<?php
+	session_start();
+	if(!isset($_SESSION['user'])) {
+		header('Location: login.php');
+	}
+?>
+
 <html>
 <head>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
@@ -8,14 +15,14 @@
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 	  <div class="container-fluid">
-	    <a class="navbar-brand" href="explore.html">bookkeeper <i class="fas fa-book-reader" style="color:hotpink"></i></a>
+	    <a class="navbar-brand" href="explore.php">bookkeeper <i class="fas fa-book-reader" style="color:hotpink"></i></a>
 	    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 	      <span class="navbar-toggler-icon"></span>
 	    </button>
 	    <div class="collapse navbar-collapse" id="navbarSupportedContent">
 	      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 	        <li class="nav-item">
-	          <a class="nav-link" href="explore.html" aria-current="page">explore</a>
+	          <a class="nav-link" href="explore.php" aria-current="page">explore</a>
 	        </li>
 	         <li class="nav-item">
 	          <a id="nav-link" class="nav-link" href="write_review.php">write a review</a>
@@ -31,6 +38,9 @@
 	          </ul>
 	        </li>
 	      </ul>
+	      <form action="logout.php" method="get">
+        	<input type="submit" value="Log out" class="btn btn-dark" />
+      	  </form>
 	    </div>
 	  </div>
 	</nav>
