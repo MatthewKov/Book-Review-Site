@@ -1,58 +1,37 @@
 <?php
+require('db_connect.php');
+
 $booktitle = $bookauthor = $rating = $description = $genre = NULL;
 $title_msg = $author_msg = $rating_msg = $description_msg =  $genre_msg = NULL;
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST')
-{
-   if (empty($_POST['title'])) 
-      $title_msg = "Please enter a book title";
-   else
-   {
-      $booktitle = trim($_POST['title']);
-      // You may reset $name_msg and use it to determine
-      // when to display an error message  
-      // $name_msg = "";     
-   }
-			 
-   if (empty($_POST['author']))
-      $author_msg = "Please enter an author";
-   else
-   {
-      $bookauthor = trim($_POST['author']);
-      // You may reset $email_msg and use it to determine
-      // when to display an error message
-      // $email_msg = "";      
-   }
-					 
-   if (empty($_POST['rating']))
-      $rating_msg = "Please enter a rating";
-   else
-   {
-      $rating = trim($_POST['rating']);
-      // You may reset $comment_msg and use it to determine
-      // when to display an error message
-      // $comment_msg = "";      
-   }
+function addPost($booktitle, $bookauthor, $genre, $rating, $description) {
+  if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+    global $db;
+  
+    $query = "INSERT INTO post (book_title, book_author, book_genre, rating, description) VALUES(:title, :author, :genre, :rating, :descr)";
 
-   if (empty($_POST['description']))
-    $description_msg = "Please enter a description";
-    else
-    {
-        $description = trim($_POST['description']);
-        // You may reset $comment_msg and use it to determine
-        // when to display an error message
-        // $comment_msg = "";      
-    }
-    
-    if (empty($_POST['genre'])) 
-      $genre_msg = "Please select a genre";
-    else
-    {
-      $genre = trim($_POST['genre']);
-      // You may reset $name_msg and use it to determine
-      // when to display an error message  
-      // $name_msg = "";     
-    }
+    $statement = $db->prepare($query);
+    $statement->bindValue(':title', $booktitle);
+    $statement->bindValue(':author', $bookauthor);
+    $statement->bindValue(':genre', $genre);
+    $statement->bindValue(':rating', $rating);
+    $statement->bindValue(':descr', $description);
+    $statement->execute();        // run query, if the statement is successfully executed, execute() returns true
+                                // false otherwise
+  
+    $statement->closeCursor();    // release hold on this connection
+  }
+}
+if (!empty($_POST['title']) && !empty($_POST['author']) && !empty($_POST['rating']) && !empty($_POST['description']) && !empty($_POST['genre'])){
+  $booktitle = trim($_POST['title']);
+  $bookauthor = trim($_POST['author']);
+  $rating = trim($_POST['rating']);
+  $description = trim($_POST['description']);
+  $genre = trim($_POST['genre']);
+  addPost($booktitle, $bookauthor, $genre, $rating, $description);
+}
+else {
+  $_POST['err_user'] = "That username is already taken";
 }
 
 ?>
@@ -175,14 +154,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 				<input type="hidden" name="rating"><br>
 				<input class="item6" id="description" name="description" type="text" placeholder="descriptions, thoughts, words of praise...">
 	</div>
-	<input type="submit" value="Submit" class="btn btn-primary" id="publish-btn" onclick="publishPost()"/>
+	<input type="submit" name="submit" value="Submit" class="btn btn-primary" id="publish-btn"/>
 	</form>
 	
 	</div>
 
 <div><span class="error_message" id="err_read"></span></div>
 <script>
-    	$(function () {
+    $(function () {
 		 $(".item4").rateYo().on("rateyo.change", function (e, data) {
 				 var rating = data.rating;
 				 $(this).parent().find('.score').text('score :'+ $(this).attr('data-rateyo-score'));
@@ -192,21 +171,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
  	});
 </script>
 
-<?php
-if ($booktitle != NULL && $bookauthor != NULL && $rating != NULL && $description != NULL && $genre!='')
-{
-   echo "<hr/>";
-   echo "Thanks for your book review submission! <br>";
-   echo "We can't wait to share your review of $bookauthor's $booktitle with our community at bookkeeper! <br>";
-   echo "Your rating of $booktitle: $rating <br>";
-   echo "Your description of $booktitle: $description <br>";	
-   echo "Book genre: $genre";
-}
-else {
-    echo "error: missing field(s); couldn't publish post";
-} 
-?>    
-	
+
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
 <!-- Latest compiled and minified JavaScript -->
