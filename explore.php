@@ -7,11 +7,13 @@
 	}
 	require('db_connect.php');
 	
+	global $db;
+
 	$query="SELECT * FROM post";
 	$statement = $db->prepare($query);
 	$statement->execute();
-?>
-
+	$post_list = $statement->fetchAll();
+	$statement->closeCursor();
 ?>
 
 <html>
@@ -38,7 +40,7 @@
 				<button class="btn" onclick="search()"><i class="fa fa-search" id="search-icon"></i></button><br>
 				<div><span class="err_search" id="err_search"></span></div>
 			</div>
-			<p class=links>
+			<!-- <p class=links>
 				<a href=“horror_genre.html”>classic</a>
 				<a href=“romance_genre.html”>horror</a>
 				<a href=“romance_genre.html”>memoir</a>
@@ -47,19 +49,41 @@
 				<a href=“romance_genre.html”>romance</a>
 				<a href=“romance_genre.html”>sci-fi</a>
 				<a href=“romance_genre.html”>thriller</a>
-			</p>
+			</p> -->
+			<p>or filter posts by genre:</p>
+  			<form action="filter.php" method="get">
+    			<label class="radio-inline">
+      				<input type="radio" name="optradio" checked>classic
+    			</label>
+    			<label class="radio-inline">
+      				<input type="radio" name="optradio">horror
+    			</label>
+    			<label class="radio-inline">
+					<input type="radio" name="optradio">memoir
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="optradio">mystery
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="optradio">nonfiction
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="optradio">romance
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="optradio">sci-fi
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="optradio">fantasy
+				</label>
+				<input type="submit" name="submit" value="Submit" class="btn btn-primary" id="filter-btn"/>
+  			</form>
 		</div>
-		<table class="table">
-    		<tr>
-      			<th> book title </th>
-      			<th> book author </th>
-    		</tr>
-
-    		<?php while ($row = $statement->fetch()): ?>
-      			<td> <?php echo $row['title'] ?> </td>
-      			<td> <?php echo $row['author'] ?> </td>
-    		<?php endwhile; ?>
-  		</table>
+		<?php
+			foreach($post_list as $post) {
+				echo "<p>" . $post['title'] . " " . $post['author'] . "</p>";
+			}
+		?>
 		<div id="outer-shell">
 		<!-- First Hardcoded Post -->
 		<div class="grid-container">
