@@ -33,9 +33,15 @@ if (!empty($_POST['title']) && !empty($_POST['author']) && !empty($_POST['rating
   $description = trim($_POST['description']);
   $genre = trim($_POST['genre']);
   addPost($booktitle, $bookauthor, $genre, $rating, $description);
+  echo "<hr/>";
+  echo "Your book review submission was successful! <br>";
+  echo "We can't wait to share your review of $bookauthor's $booktitle with our community at bookkeeper! <br>";
+  echo "Your rating of $booktitle: $rating <br>";
+  echo "Your description of $booktitle: $description <br>";	
+  echo "Book genre: $genre";
 }
 else {
-  $_POST['err_user'] = "That username is already taken";
+  $_POST['err_user'] = "Please fill out all required fields to make a post";
 }
 
 ?>

@@ -6,8 +6,11 @@
 		header('Location: login.php');
 	}
 	require('db_connect.php');
-	//put all php code below here
 	
+	$query="SELECT * FROM post";
+	$statement = $db->prepare($query);
+	$statement->execute();
+?>
 
 ?>
 
@@ -46,6 +49,17 @@
 				<a href=“romance_genre.html”>thriller</a>
 			</p>
 		</div>
+		<table class="table">
+    		<tr>
+      			<th> book title </th>
+      			<th> book author </th>
+    		</tr>
+
+    		<?php while ($row = $statement->fetch()): ?>
+      			<td> <?php echo $row['title'] ?> </td>
+      			<td> <?php echo $row['author'] ?> </td>
+    		<?php endwhile; ?>
+  		</table>
 		<div id="outer-shell">
 		<!-- First Hardcoded Post -->
 		<div class="grid-container">
