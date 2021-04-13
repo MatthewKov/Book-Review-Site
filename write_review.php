@@ -157,7 +157,7 @@ else {
                         <option value="nonfiction">nonfiction</option>
                         <option value="romance">romance</option>
                         <option value="scifi">sci-fi</option>
-                        <option value="thriller">thriller</option>
+                        <option value="thriller">fantasy</option>
                     </select>
                 </div>
 
