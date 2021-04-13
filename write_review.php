@@ -31,6 +31,7 @@ if (!empty($_POST['title']) && !empty($_POST['author']) && !empty($_POST['rating
   $bookauthor = trim($_POST['author']);
   $rating = trim($_POST['rating']);
   $description = trim($_POST['description']);
+  echo $_POST['genre'] . "<br/>";
   $genre = trim($_POST['genre']);
   addPost($booktitle, $bookauthor, $genre, $rating, $description);
   echo "<hr/>";
@@ -151,13 +152,13 @@ else {
                     <select name="genre" id="genre">
                         <option value="" selected disabled hidden>choose here</option>
                         <option value="classic">classic</option>
+                        <option value="thriller">fantasy</option>
                         <option value="horror">horror</option>
                         <option value="memoir">memoir</option>
                         <option value="mystery">mystery</option>
                         <option value="nonfiction">nonfiction</option>
                         <option value="romance">romance</option>
-                        <option value="scifi">sci-fi</option>
-                        <option value="thriller">fantasy</option>
+                        <option value="sci-fi">sci-fi</option>
                     </select>
                 </div>
 
