@@ -81,7 +81,7 @@
 		</div>
 		<?php
 			foreach($post_list as $post) {
-				echo "<p>" . $post['title'] . " " . $post['author'] . "</p>";
+				echo "<p>" . $post['book_title'] . " " . $post['book_author'] . "</p>";
 			}
 		?>
 		<div id="outer-shell">
