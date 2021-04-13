@@ -1,3 +1,4 @@
+<!-- Contributions by Louisa Evola and Matthew Kovalenko-->
 <?php
 session_start();
 if(!isset($_SESSION['user'])) {
@@ -47,7 +48,6 @@ else {
 
 ?>
 <!DOCTYPE html>
-<!-- Contributions by Louisa Evola and Matthew Kovalenko-->
 <html>
 <style>
 .header {grid-area: title;}
