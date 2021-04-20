@@ -20,7 +20,6 @@
 		$statement->bindValue(':genre', $_GET['genre']);
 	}
 	
-	
 	$statement->execute();
 	$post_list = $statement->fetchAll();
 	$statement->closeCursor();
@@ -82,98 +81,92 @@
 				<input type="submit" name="submit" value="Filter" class="btn btn-primary" id="filter-btn"/>
   			</form>
 		</div>
+		
+		<div id='shell'></div>
+		<script>
+	
+	function test(param){
+			var shell = document.getElementById("shell");
+		
+			var gridContainer = document.createElement("div");
+			gridContainer.className = "grid-container"; 
+			shell.appendChild(gridContainer);
+			
+			var postContainer = document.createElement("div");
+			postContainer.className = "post-container";
+			gridContainer.appendChild(postContainer);
+
+			var item1 = document.createElement("div"); // img 
+			var item2 = document.createElement("div"); // title by author
+			var item3 = document.createElement("div"); // rating
+			var item4 = document.createElement("div");
+			var item5 = document.createElement("div");
+
+			item1.className = "item1";
+			item2.className = "item2";
+			item3.className = "item3";
+			item4.className = "item4";
+			item5.className = "item5";
+
+			var img = document.createElement("img");
+			img.src = "educated.jpg";
+			img.style = "width:100px;height:165px";
+			item1.appendChild(img);
+			postContainer.appendChild(item1);
+
+			var item2 = document.createElement("div");
+			item2.className = "item2";
+			var line1 = document.createElement("p");
+			var title = JSON.stringify(param[1]);
+			var author = JSON.stringify(param[2]);
+
+			line1.innerHTML = "<b>" + title + "</b>" + " by " + author;
+			item2.appendChild(line1);
+
+			// var genre = JSON.stringify(param[3]);
+			// var line2 = document.createElement("p");
+			// line2.innerHTML = genre;
+			// item3.appendChild(line2);
+
+			var rating = JSON.stringify(param[4]);
+			var line3 = document.createElement("p");
+			line3.innerHTML = rating;
+			item3.appendChild(line3);
+
+			var description = JSON.stringify(param[5]);
+			var line4 = document.createElement("p");
+			line4.innerHTML = description;
+			item4.appendChild(line4);
+
+			// document.write(JSON.stringify(param));
+			
+			var comment = document.createElement("input");
+			comment.placeholder = "type a comment...";
+			var commentBtn = document.createElement("button");
+			commentBtn.type = "button";
+			commentBtn.id = "submit";
+			commentBtn.className = "btn btn-outline-info";
+			var like = document.createElement("i");
+			like.className = "far fa-heart";
+
+			comment.appendChild(commentBtn);
+			item5.appendChild(comment);
+			item5.appendChild(like);
+
+			postContainer.appendChild(item2);
+			postContainer.appendChild(item3);
+			postContainer.appendChild(item4);
+			postContainer.appendChild(item5);
+		}	
+</script>
 		<?php
 			foreach($post_list as $post) {
-				echo "<p>" . $post['book_title'] . " by " . $post['book_author'] . "</p>";
-			}
+				echo '<script type="text/javascript">
+						test(' . json_encode($post) . ');
+					   </script>';
+			}	
 		?>
-		<div id="outer-shell">
-		<!-- First Hardcoded Post -->
-		<div class="grid-container">
-		  <div class="post-container">
-		  	<div class="item1"><img src="educated.jpg" alt="Educated" style="width:100px;height:165px;"></div>	
-  			<div class="item2"><b>louisaevola100</b> reviewed <b>Educated</b> by <b>Tara Westover</b></div>	
-  			<div class="item3">
-  				<span class="fa fa-star checked"></span>
-				<span class="fa fa-star checked"></span>
-				<span class="fa fa-star checked"></span>
-				<span class="fa fa-star"></span>
-				<span class="fa fa-star"></span>
-  			</div>
-  			<div class="item4">Enthralling book about a peculiar childhood! A must read memoir.</div>
-  			<div class="item5">
-  				<input id="reaction" type="text" placeholder="type a comment..."><button type="button" id="submit" class="btn btn-outline-info">Submit  
-  				</button></input>
-  				<br/>
-  				<i id="like" class="far fa-heart"></i>
-  			</div>
-		  </div>
-
-		  <!-- Second Hardcoded Post -->
-		  <div class="grid-container">
-		  <div class="post-container">
-		  	<div class="item1"><img src="light-book.jpg" alt="All the Light We Cannot See" style="width:100px;height:165px;"></div>	
-  			<div class="item2"><b>matthewkovalenko</b> reviewed <b>All the Light We Cannot See</b> by <b>Anthony Doerr</b></div>	
-  			<div class="item3">
-  				<span class="fa fa-star checked"></span>
-				<span class="fa fa-star checked"></span>
-				<span class="fa fa-star checked"></span>
-				<span class="fa fa-star"></span>
-				<span class="fa fa-star-half-alt"></span>
-  			</div>
-  			<div class="item4">Really well written book that weaves fiction and history.</div>
-  			<div class="item5">
-  				<input id="reaction" type="text" placeholder="type a comment..."><button type="button" id="submit" class="btn btn-outline-info">Submit  
-  				</button></input>
-  				<br/>
-  				<i id="like" class="far fa-heart"></i>
-  			</div>
-		  </div>
-
-		  <!-- Third Hardcoded Post -->
-		  <div class="grid-container">
-		  <div class="post-container">
-		  	<div class="item1"><img src="in-the-time.jpg" alt="In the Time of the Butterflies" style="width:100px;height:165px;"></div>	
-  			<div class="item2"><b>user4578475</b> reviewed <b>In the Time of the Butterflies</b> by <b>Julia Alvarez</b></div>	
-  			<div class="item3">
-  				<span class="fa fa-star checked"></span>
-				<span class="fa fa-star checked"></span>
-				<span class="fa fa-star"></span>
-				<span class="fa fa-star"></span>
-				<span class="fa fa-star"></span>
-  			</div>
-  			<div class="item4">An amazing book about sisterhood and family inspired by true events.</div>
-  			<div class="item5">
-  				<input id="reaction" type="text" placeholder="type a comment..."><button type="button" id="submit" class="btn btn-outline-info">Submit  
-  				</button></input>
-  				<br/>
-  				<i id="like" class="far fa-heart"></i>
-  			</div>
-		  </div>
-		</div>
-
-		<!-- Fourth Hardcoded Post -->
-		<div class="grid-container">
-		  <div class="post-container">
-		  	<div class="item1"><img src="crazy-rich-asians.jpg" alt="Crazy Rich Asians" style="width:100px;height:165px;"></div>	
-  			<div class="item2"><b>newuser</b> reviewed <b>Crazy Rich Asians</b> by <b>Kevin Kwan</b></div>	
-  			<div class="item3">
-  				<span class="fa fa-star checked"></span>
-				<span class="fa fa-star checked"></span>
-				<span class="fa fa-star checked"></span>
-				<span class="fa fa-star"></span>
-				<span class="far fa-star"></span>
-  			</div>
-  			<div class="item4">Better than the movie, which is saying a lot!</div>
-  			<div class="item5">
-  				<input id="reaction" type="text" placeholder="type a comment..."><button type="button" id="submit" class="btn btn-outline-info">Submit  
-  				</button></input>
-  				<br/>
-  				<i id="like" class="far fa-heart"></i>
-  			</div>
-		  </div>
-		</div>
-	</div>
+		
 	<script>
 		let search = function() {
 			var searchBar = document.getElementById("search-bar").value;
@@ -184,7 +177,7 @@
 			else {
 				document.getElementById("err_search").innerHTML = "";	
 			}
-		}	
+		}
 	</script>
 	</body>
 </html>
