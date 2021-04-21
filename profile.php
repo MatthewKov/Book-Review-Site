@@ -81,6 +81,19 @@
 		$statement->bindValue(':title', $title);
 		$statement->bindValue(':author', $author);
 		$statement->execute();
+		$statement->closeCursor();
+	}
+
+	function updateBio($user, $content) {
+		global $db;
+
+		$query = "UPDATE user SET bio = :content WHERE username = :user";
+
+		$statement = $db->prepare($query);
+		$statement->bindValue(':content', $content);
+		$statement->bindValue(':user', $user);
+		$statement->execute();
+		$statement->closeCursor();
 	}
 
 	$_POST['err_read'] = "";
@@ -118,6 +131,10 @@
 		$title = $data[2];
 		$author = $data[3];
 		deleteBook($title, $author, $_SESSION['user'], "books_to_read");
+	}
+
+	if(isset($_POST['update_bio'])) {
+		updateBio($_SESSION['user'], trim($_POST['bio_hidden']));
 	}
 
 	global $db;
@@ -163,13 +180,17 @@
 		</header>
 		<?php $var = "var"; ?>
 		<div id="person-info">
-			<div id=user>
-				<img id="profile-pic" src="profile-pic.png" alt="" width="100" height="100">
-				<label for="profile-pic"><?php echo $_SESSION['user'] ?></label>
-			</div>
-			<div id="bio">
-				<p id="bio-txt"><?php if(!is_null($profile_list['bio'])) {echo $profile_list['bio'];} else echo "Write a little about yourself here!"; ?> </[span]>
-			</div>
+			<form action="profile.php" name="bio_form" method="post">
+				<div id=user>
+					<img id="profile-pic" src="profile-pic.png" alt="" width="100" height="100">
+					<label for="profile-pic"><?php echo $_SESSION['user'] ?></label>
+				</div>
+				<div id="bio" contenteditable="true" onkeyup="updateBio()"><?php echo $profile_list['bio']; ?></div>
+				<div>
+					<button type="submit" name="update_bio" class="btn btn-secondary center">Update</button>
+					<input type="hidden" id="bio_hidden" name="bio_hidden">
+				</div>
+			</form>
 		</div>
 
 		<div id="bookshelf" class="flex-container">
@@ -218,6 +239,12 @@
 	  		$(function(){
   				$("#nav-placeholder").load("navbar.php");
 			});
+
+			function updateBio() {
+				var bio = document.getElementById('bio').innerHTML;
+				var hidden = document.getElementById('bio_hidden');
+				hidden.value = bio;
+		    }
   		</script>
 	</body>
 		

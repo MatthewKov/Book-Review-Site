@@ -19,6 +19,13 @@
   padding: 10px;
 }
 
+.center {
+  text-align: center;
+  width: 300px;
+  margin: 0 auto;
+  display: block;
+}
+
 #user {
   display: block;
   margin: auto;      
@@ -31,6 +38,5 @@
   border: solid black 2px;
   padding: 10px;
   display: block;
-  margin: auto;      
-
+  margin: auto;
 }
