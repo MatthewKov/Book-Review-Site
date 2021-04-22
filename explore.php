@@ -43,44 +43,46 @@
   				$("#nav-placeholder").load("navbar.php");
 			});
   		</script>
-		<div id="filtering">
+		
 			<div class="wrapper">
 				<input id="search-bar" type="text" placeholder="Search for a book...">
 				<button class="btn" onclick="search()"><i class="fa fa-search" id="search-icon"></i></button><br>
 				<div><span class="err_search" id="err_search"></span></div>
 			</div>
-			<p>Or filter posts by genre:</p>
-  			<form action="explore.php" method="get">
-  				<label class="radio-inline">
-      				<input type="radio" name="genre" value="all" <?php if(!isset($_GET['genre']) || $_GET['genre'] == 'all') echo 'checked' ?> >all
-    			</label>
-    			<label class="radio-inline">
-      				<input type="radio" name="genre" value="classic" <?php if(isset($_GET['genre']) && $_GET['genre'] == 'classic') echo 'checked' ?> >classic
-    			</label>
-    			<label class="radio-inline">
-					<input type="radio" name="genre" value="fantasy" <?php if(isset($_GET['genre']) && $_GET['genre'] == 'fantasy') echo 'checked' ?>>fantasy
-				</label>
-    			<label class="radio-inline">
-      				<input type="radio" name="genre" value="horror" <?php if(isset($_GET['genre']) && $_GET['genre'] == 'horror') echo 'checked' ?>>horror
-    			</label>
-    			<label class="radio-inline">
-					<input type="radio" name="genre" value="memoir" <?php if(isset($_GET['genre']) && $_GET['genre'] == 'memoir') echo 'checked' ?>>memoir
-				</label>
-				<label class="radio-inline">
-					<input type="radio" name="genre" value="mystery" <?php if(isset($_GET['genre']) && $_GET['genre'] == 'mystery') echo 'checked' ?>>mystery
-				</label>
-				<label class="radio-inline">
-					<input type="radio" name="genre" value="nonfiction" <?php if(isset($_GET['genre']) && $_GET['genre'] == 'nonfiction') echo 'checked' ?>>nonfiction
-				</label>
-				<label class="radio-inline">
-					<input type="radio" name="genre" value="romance" <?php if(isset($_GET['genre']) && $_GET['genre'] == 'romance') echo 'checked' ?>>romance
-				</label>
-				<label class="radio-inline">
-					<input type="radio" name="genre" value="sci-fi" <?php if(isset($_GET['genre']) && $_GET['genre'] == 'sci-fi') echo 'checked' ?>>sci-fi
-				</label>
-				<input type="submit" name="submit" value="Filter" class="btn btn-primary" id="filter-btn"/>
-  			</form>
-		</div>
+
+			<div id="filtering">
+				<p>Or filter posts by genre:</p>
+  				<form action="explore.php" method="get">
+  					<label class="radio-inline">
+      					<input type="radio" name="genre" value="all" <?php if(!isset($_GET['genre']) || $_GET['genre'] == 'all') echo 'checked' ?> >all
+    				</label>
+    				<label class="radio-inline">
+      					<input type="radio" name="genre" value="classic" <?php if(isset($_GET['genre']) && $_GET['genre'] == 'classic') echo 'checked' ?> >classic
+    				</label>
+    				<label class="radio-inline">
+						<input type="radio" name="genre" value="fantasy" <?php if(isset($_GET['genre']) && $_GET['genre'] == 'fantasy') echo 'checked' ?>>fantasy
+					</label>
+    				<label class="radio-inline">
+      					<input type="radio" name="genre" value="horror" <?php if(isset($_GET['genre']) && $_GET['genre'] == 'horror') echo 'checked' ?>>horror
+    				</label>
+    				<label class="radio-inline">
+						<input type="radio" name="genre" value="memoir" <?php if(isset($_GET['genre']) && $_GET['genre'] == 'memoir') echo 'checked' ?>>memoir
+					</label>
+					<label class="radio-inline">
+						<input type="radio" name="genre" value="mystery" <?php if(isset($_GET['genre']) && $_GET['genre'] == 'mystery') echo 'checked' ?>>mystery
+					</label>
+					<label class="radio-inline">
+						<input type="radio" name="genre" value="nonfiction" <?php if(isset($_GET['genre']) && $_GET['genre'] == 'nonfiction') echo 'checked' ?>>nonfiction
+					</label>
+					<label class="radio-inline">
+						<input type="radio" name="genre" value="romance" <?php if(isset($_GET['genre']) && $_GET['genre'] == 'romance') echo 'checked' ?>>romance
+					</label>
+					<label class="radio-inline">
+						<input type="radio" name="genre" value="sci-fi" <?php if(isset($_GET['genre']) && $_GET['genre'] == 'sci-fi') echo 'checked' ?>>sci-fi
+					</label>
+					<input type="submit" name="submit" id="submit" value="Filter" class="btn btn-primary" id="filter-btn"/>
+  				</form>
+			</div>
 		
 		<div id='shell'></div>
 		<script>

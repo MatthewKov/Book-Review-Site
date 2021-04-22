@@ -4,36 +4,37 @@
   display: grid;
   /*background-color: #2196F3;*/
   grid-gap: 10px;
-  /*padding: 10px;*/
+  padding: 10px;
 }
 .grid-container > div {
   /*padding: 0px 10px;*/
   background-color: rgba(255, 255, 255, 0.8);
 }
   .item1 { grid-area: book-image; }
-	.item2 { grid-area: header-info; }
-	.item3 { grid-area: rating; }
-	.item4 { grid-area: book-review; }
-	.item5 { grid-area: reactions; }
+  .item2 { grid-area: header-info; }
+  .item3 { grid-area: rating; }
+  .item4 { grid-area: book-review; }
+  .item5 { grid-area: reactions; }
 
 .post-container {
     display: grid;
-  	grid-template-areas:
-    	'book-image header-info header-info header-info header-info header-info'
-    	'book-image rating rating rating rating rating'
-    	'book-image book-review book-review book-review book-review book-review'
-    	'book-image reactions reactions reactions reactions reactions';
-  	/*grid-gap: 10px;*/
-  	/*background-color: #2196F3;*/
+    grid-template-areas:
+      'book-image header-info header-info header-info header-info header-info'
+      'book-image rating rating rating rating rating'
+      'book-image book-review book-review book-review book-review book-review'
+      'book-image reactions reactions reactions reactions reactions';
     border: solid black 2px;
-    width:90%;
+    margin: auto;
+    width:60%;
+    padding: 10px;
 }
 
 .post-container > div {
   /*background-color: rgba(255, 255, 255, 0.8);*/
-  /*text-align: center;*/
+  /*text-align: center; */
   /*padding-left: 20px;*/
   font-size: 15px;
+
 
 }
 
@@ -66,19 +67,11 @@
     width: 70%;
 }
 
-.links {
-  display: block;
-  margin: auto;      
-  width: 70%;
-  padding: 2px 2px 20px 112px;
-}
-
-.links > a {
-  text-decoration: none;
-  padding-left: 2px;
-}
-.links > a:hover {
-  color:hotpink;
+#filtering{
+    padding: 30px 2px 2px 100px;
+    display: block;
+    margin: auto;      
+    width: 70%; 
 }
 
 #like {
@@ -90,11 +83,10 @@
    color:red !important;
 }
 
-
 #submit {
-  margin-left: 12px;
+  margin: auto;
   font-size: 12px;
-  padding: 2px 2px 2px 2px;
+  padding: 5px 5px 5px 5px;
 }
 
 #err_search {
