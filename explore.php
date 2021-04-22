@@ -46,12 +46,12 @@
 		
 			<div class="wrapper">
 				<input id="search-bar" type="text" placeholder="Search for a book...">
-				<button class="btn" onclick="search()"><i class="fa fa-search" id="search-icon"></i></button><br>
+				<button class="btn" onclick="search()" style="background-color: #53917E"><i class="fa fa-search" id="search-icon" style="color:white"></i></button><br>
 				<div><span class="err_search" id="err_search"></span></div>
 			</div>
 
 			<div id="filtering">
-				<p>Or filter posts by genre:</p>
+				<p>or filter posts by genre:</p>
   				<form action="explore.php" method="get">
   					<label class="radio-inline">
       					<input type="radio" name="genre" value="all" <?php if(!isset($_GET['genre']) || $_GET['genre'] == 'all') echo 'checked' ?> >all

@@ -13,22 +13,22 @@
 	<link rel="stylesheet" href="navbar-style.css">
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #fffbd6; height: 100px;">
 	  <div class="container-fluid">
-	    <a class="navbar-brand" href="explore.php">bookkeeper <i class="fas fa-book-reader" style="color:hotpink"></i></a>
+	    <a class="navbar-brand" href="explore.php"><i class="fas fa-book-reader fa-3x" style="color:#53917E;"></i></a>
 	    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 	      <span class="navbar-toggler-icon"></span>
 	    </button>
 	    <div class="collapse navbar-collapse" id="navbarSupportedContent">
 	      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 	        <li class="nav-item">
-	          <a class="nav-link" href="explore.php" aria-current="page">explore</a>
+	          <a class="nav-link" href="explore.php" aria-current="page" style="font-size: 20px;">explore</a>
 	        </li>
 	         <li class="nav-item">
-	          <a id="nav-link" class="nav-link" href="write_review.php">write a review</a>
+	          <a id="nav-link" class="nav-link" href="write_review.php" style="font-size: 20px;">write a review</a>
 	        </li>
 	    	<li class="nav-item dropdown">
-	          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+	          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 20px;">
 	            my profile
 	          </a>
 	          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">

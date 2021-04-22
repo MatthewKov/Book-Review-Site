@@ -117,17 +117,25 @@ else {
 	<header>
 			<div id="nav-placeholder"></div>
 	</header>
-	<script>
+	
+  <script>
   		$(function(){  				
   			$("#nav-placeholder").load("navbar.php");
 		});
   </script>
-  	<br>
-
+  
+  <br>
+  
+  <div class="container" style="padding-left:10px;">
+    <!-- Jumbotron -->
+    <div class="jumbotron" style="background-color: #CBE2DB; border-radius: 6px">
+      <h1 class="display-6" style="padding: 20px 20px 20px 20px; margin:auto; text-align: center">review your latest read!</h1>
+    </div>
+  </div>
+  
   <div class="outer-shell">
   <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
 	<div class="grid-container">		
-		<div class="title"><p>review your latest read! </p></div>
 				<div class="item1" id="book-img-upload"><i class="far fa-images fa-2x"></i><br/><input type="file" id="img" name="img" accept="image/*"></div>	
 				<div class="item2" id="book-title">
 					<label>Book title: </label>
