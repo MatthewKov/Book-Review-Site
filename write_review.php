@@ -28,15 +28,50 @@ function addPost($booktitle, $bookauthor, $genre, $rating, $description) {
     $statement->closeCursor();    // release hold on this connection
   }
 }
+
+function bookExists($title, $author, $user) {
+    global $db;
+
+    $query = "SELECT * FROM post WHERE username=:user AND book_title=:title AND book_author=:author";
+
+    $statement = $db->prepare($query);
+    $statement->bindValue(':user', $user);
+    $statement->bindValue(':title', $title);
+    $statement->bindValue(':author', $author);
+    $statement->execute();
+
+    $result = $statement->fetchAll();
+
+    if(empty($result)) { //query returned nothing, so book does not exist
+      $statement->closeCursor();
+      return false;
+    }
+
+    // Membership in the list should be case insensitive
+    $userBool = strtolower($result[0]['username']) == strtolower($user);
+    $titleBool = strtolower($result[0]['book_title']) == strtolower($title);
+    $authorBool = strtolower($result[0]['book_author']) == strtolower($author);
+    if($userBool && $titleBool && $authorBool) {
+      $statement->closeCursor();
+      return true;
+    }
+    $statement->closeCursor();
+    return false;
+  }
+
 if (!empty($_POST['title']) && !empty($_POST['author']) && !empty($_POST['rating']) && !empty($_POST['description']) && !empty($_POST['genre'])){
   $booktitle = trim($_POST['title']);
   $bookauthor = trim($_POST['author']);
   $rating = trim($_POST['rating']);
   $description = trim($_POST['description']);
-  // echo $_POST['genre'] . "<br/>";
   $genre = $_POST['genre'];
-  addPost($booktitle, $bookauthor, $genre, $rating, $description);
-  header('Location: explore.php');
+  if(bookExists($booktitle, $bookauthor, $_SESSION['user'])) {
+    $_POST['err_input'] = "You have already reviewed that book";
+  }
+  else {
+    addPost($booktitle, $bookauthor, $genre, $rating, $description);
+    header('Location: explore.php');
+  }
   // echo "<hr/>";
   // echo "Your book review submission was successful! <br>";
   // echo "We can't wait to share your review of $bookauthor's $booktitle with our community at bookkeeper! <br>";
@@ -177,7 +212,7 @@ if (!empty($_POST['title']) && !empty($_POST['author']) && !empty($_POST['rating
 	
 	</div>
 
-<div><span class="error_message" id="err_input"></span></div>
+<div><span class="error_message" id="err_input"><?php if(isset($_POST['err_input'])) echo $_POST['err_input']; ?></span></div>
 <script>
     $(function () {
 		 $(".item4").rateYo().on("rateyo.change", function (e, data) {
