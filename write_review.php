@@ -13,9 +13,10 @@ function addPost($booktitle, $bookauthor, $genre, $rating, $description) {
   if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     global $db;
   
-    $query = "INSERT INTO post (book_title, book_author, book_genre, rating, description) VALUES(:title, :author, :genre, :rating, :descr)";
+    $query = "INSERT INTO post (username, book_title, book_author, book_genre, rating, description) VALUES(:user, :title, :author, :genre, :rating, :descr)";
 
     $statement = $db->prepare($query);
+    $statement->bindValue(':user', $_SESSION['user']);
     $statement->bindValue(':title', $booktitle);
     $statement->bindValue(':author', $bookauthor);
     $statement->bindValue(':genre', $genre);
@@ -32,18 +33,16 @@ if (!empty($_POST['title']) && !empty($_POST['author']) && !empty($_POST['rating
   $bookauthor = trim($_POST['author']);
   $rating = trim($_POST['rating']);
   $description = trim($_POST['description']);
-  echo $_POST['genre'] . "<br/>";
-  $genre = trim($_POST['genre']);
+  // echo $_POST['genre'] . "<br/>";
+  $genre = $_POST['genre'];
   addPost($booktitle, $bookauthor, $genre, $rating, $description);
-  echo "<hr/>";
-  echo "Your book review submission was successful! <br>";
-  echo "We can't wait to share your review of $bookauthor's $booktitle with our community at bookkeeper! <br>";
-  echo "Your rating of $booktitle: $rating <br>";
-  echo "Your description of $booktitle: $description <br>";	
-  echo "Book genre: $genre";
-}
-else {
-  $_POST['err_user'] = "Please fill out all required fields to make a post";
+  header('Location: explore.php');
+  // echo "<hr/>";
+  // echo "Your book review submission was successful! <br>";
+  // echo "We can't wait to share your review of $bookauthor's $booktitle with our community at bookkeeper! <br>";
+  // echo "Your rating of $booktitle: $rating <br>";
+  // echo "Your description of $booktitle: $description <br>";	
+  // echo "Book genre: $genre";
 }
 
 ?>
@@ -108,7 +107,7 @@ else {
 <head>
 	<meta charset="utf-8">
   		<meta name="viewport" content="width=device-width, initial-scale=1">
-  		<title>Website name</title>
+  		<title>BookKeeper</title>
   		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   		<script src="https://kit.fontawesome.com/595acf0be0.js" crossorigin="anonymous"></script>
       <!-- <link rel="stylesheet" href="write-review-style.css"> -->
@@ -134,7 +133,7 @@ else {
   </div>
   
   <div class="outer-shell">
-  <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
+  <form action="write_review.php" method="post" onsubmit="return checkInput()">
 	<div class="grid-container">		
 				<div class="item1" id="book-img-upload"><i class="far fa-images fa-2x"></i><br/><input type="file" id="img" name="img" accept="image/*"></div>	
 				<div class="item2" id="book-title">
@@ -170,15 +169,15 @@ else {
                     </select>
                 </div>
 
-				<input type="hidden" name="rating"><br>
+				<input type="hidden" name="rating" id="rating"><br>
 				<input class="item6" id="description" name="description" type="text" placeholder="descriptions, thoughts, words of praise...">
 	</div>
-	<input type="submit" name="submit" value="Submit" class="btn btn-primary" id="publish-btn"/>
+    <input type="submit" name="submit" value="Submit" class="btn btn-primary" id="publish-btn" />
 	</form>
 	
 	</div>
 
-<div><span class="error_message" id="err_read"></span></div>
+<div><span class="error_message" id="err_input"></span></div>
 <script>
     $(function () {
 		 $(".item4").rateYo().on("rateyo.change", function (e, data) {
@@ -188,6 +187,38 @@ else {
 				 $(this).parent().find('input[name=rating]').val(rating); //add rating value to input field
 		 });
  	});
+
+    function checkInput() {
+      console.log("here");
+      var complete = true;
+      var title = document.getElementById("title");
+      var author = document.getElementById("author");
+      var rating = document.getElementById("rating");
+      var genre = document.getElementById("genre");
+      var description = document.getElementById("description");
+      if(title.value === "") {
+        complete = false;
+        document.getElementById("err_input").innerHTML = "Please fill out all required fields to make a post";
+      }
+      else if(author.value === "") {
+        complete = false;
+        document.getElementById("err_input").innerHTML = "Please fill out all required fields to make a post";
+      }
+      else if(rating.value === "") {
+        complete = false;
+        document.getElementById("err_input").innerHTML = "Please fill out all required fields to make a post";
+      }
+      else if(genre.value === "") {
+        complete = false;
+        document.getElementById("err_input").innerHTML = "Please fill out all required fields to make a post";
+      }
+      else if(description.value === "") {
+        complete = false;
+        document.getElementById("err_input").innerHTML = "Please fill out all required fields to make a post";
+      }
+
+      return complete;
+    }
 </script>
 
 
