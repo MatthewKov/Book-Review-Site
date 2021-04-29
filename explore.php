@@ -203,12 +203,15 @@
 			like.className = "far fa-heart";
 
 			// comment.appendChild(commentBtn);
+			var item0 = document.createElement("div");
+			item0.appendChild(like);
 			item5.appendChild(comment);
 			item5.appendChild(hidden_post_id);
 			item5.appendChild(commentBtn);
 			comment_form.appendChild(item5);
 			item5.appendChild(c_lbl);
-			item5.appendChild(like);
+
+			postContainer.appendChild(item0);
 			postContainer.appendChild(item1);
 			postContainer.appendChild(item2);
 			postContainer.appendChild(item3);
@@ -222,8 +225,14 @@
 			var n = 'lbl' + id + '';
 
 			var lbl = document.getElementById(n);
-			document.write(n);
-			lbl.innerHTML = lbl.innerHTML + "<br>" + JSON.parse(JSON.stringify(param["comment"])) + "</br>";;
+			var c = document.createElement("div");
+			c.style.border = "thick solid #E5E5E5";
+			c.style.borderRadius = "25px";
+			c.style.marginTop = "10px";
+			c.style.paddingLeft = "15px";
+			c.innerHTML = "" + JSON.parse(JSON.stringify(param["comment"])) + "";
+			// document.write(n);
+			lbl.appendChild(c);
 			// var elementExists = document.getElementById("lbl" + id);
 			// document.write(elementExists);
 			// if (!elementExists=="null"){
