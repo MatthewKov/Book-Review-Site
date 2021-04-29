@@ -47,6 +47,13 @@
 	$post_list = $filter_statement->fetchAll();
 	$filter_statement->closeCursor();
 
+	$comment_query = "SELECT * FROM comments";
+	$comment_statement = $db->prepare($comment_query);
+	// $comment_statement->bindValue(':usr', $_SESSION['user']);
+	$comment_statement->execute();
+	$comment_list = $comment_statement->fetchAll();
+	$comment_statement->closeCursor();
+
 ?>
 
 <html>
@@ -111,7 +118,7 @@
 		<div id='shell'></div>
 		<script>
 	
-	function test(param){
+	function post(param){
 			var shell = document.getElementById("shell");
 		
 			var gridContainer = document.createElement("div");
@@ -173,6 +180,7 @@
 			comment.name = "comment_box";
 			comment.id = "comment_box";
 
+
 			var commentBtn = document.createElement("button");
 			var post_id = JSON.parse(JSON.stringify(param[0]));
 			var hidden_post_id = document.createElement("input");
@@ -185,17 +193,22 @@
 			commentBtn.className = "btn btn-outline-info";
 			commentBtn.name = "comment_btn";
 			commentBtn.id = "comment_btn";
+			
+			var c_lbl = document.createElement("div");
+			// c_lbl.style = "style='display: none;'";
+			c_lbl.id = "lbl" + post_id;
+			c_lbl.innerHTML = "";
 
-			// var like = document.createElement("i");
-			// like.className = "far fa-heart";
+			var like = document.createElement("i");
+			like.className = "far fa-heart";
 
 			// comment.appendChild(commentBtn);
 			item5.appendChild(comment);
 			item5.appendChild(hidden_post_id);
 			item5.appendChild(commentBtn);
 			comment_form.appendChild(item5);
-			// item5.appendChild(like);
-
+			item5.appendChild(c_lbl);
+			item5.appendChild(like);
 			postContainer.appendChild(item1);
 			postContainer.appendChild(item2);
 			postContainer.appendChild(item3);
@@ -203,14 +216,35 @@
 			postContainer.appendChild(comment_form);
 			// postContainer.appendChild(item5);
 		}	
+
+		function load_comments(param){
+			var id = JSON.parse(JSON.stringify(param["post_id"]));
+			var n = 'lbl' + id + '';
+
+			var lbl = document.getElementById(n);
+			document.write(n);
+			lbl.innerHTML = lbl.innerHTML + "<br>" + JSON.parse(JSON.stringify(param["comment"])) + "</br>";;
+			// var elementExists = document.getElementById("lbl" + id);
+			// document.write(elementExists);
+			// if (!elementExists=="null"){
+			// 	document.write(id);
+			// }
+
+		}
+
 </script>
 		<?php
 			foreach($post_list as $post) {
 				echo '<script type="text/javascript">
-						test(' . json_encode($post) . ');
+						post(' . json_encode($post) . ');
 					   </script>';
 			}	
-		?>
+			foreach($comment_list as $comment) {
+				echo '<script type="text/javascript">
+						load_comments(' . json_encode($comment) . ');
+					   </script>';
+			}
+?>
 		
 	<script>
 		let search = function() {
