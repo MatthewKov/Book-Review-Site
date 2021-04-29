@@ -98,14 +98,6 @@
 			postContainer.className = "post-container";
 			gridContainer.appendChild(postContainer);
 
-
-			var item0 = document.createElement("div"); // username
-			item0.className = "item0";
-			var line0 = document.createElement("p");
-			var username = JSON.stringify(param[1]);
-			line0.innerHTML = "<b>" + username + "</b>";
-			item0.appendChild(line0);
-
 			var item1 = document.createElement("div"); // img 
 			item1.className = "item1";
 			 img = document.createElement("img");
@@ -113,12 +105,13 @@
 			img.style = "width:100px;height:165px";
 			item1.appendChild(img);
 
-			var item2 = document.createElement("div"); // title by author
+			var item2 = document.createElement("div"); // username reviewed title by author
 			item2.className = "item2";
 			var line1 = document.createElement("p");
-			var title = JSON.stringify(param[2]);
-			var author = JSON.stringify(param[3]);
-			line1.innerHTML = "<b>" + title + "</b>" + " by " + author;
+			var username = JSON.parse(JSON.stringify(param[1])); 
+			var title = JSON.parse(JSON.stringify(param[2]));
+			var author = JSON.parse(JSON.stringify(param[3]));
+			line1.innerHTML = "<b>" + username + "</b>  reviewed  " + "<b>" + title + "</b>" + "  by  " + "<b>" + author + "</b>";
 			item2.appendChild(line1);
 
 			// var genre = JSON.stringify(param[3]);
@@ -128,16 +121,16 @@
 
 			var item3 = document.createElement("div"); // rating
 			item3.className = "item3";
-			var rating = JSON.stringify(param[5]);
+			var rating = JSON.parse(JSON.stringify(param[5]));
 			var line3 = document.createElement("p");
-			line3.innerHTML = rating;
+			line3.innerHTML = rating + "/5" + "<i class='fas fa-star'></i>";
 			item3.appendChild(line3);
 
-			var item4 = document.createElement("div");
+			var item4 = document.createElement("div"); // description
 			item4.className = "item4";
-			var description = JSON.stringify(param[6]);
+			var description = JSON.parse(JSON.stringify(param[6]));
 			var line4 = document.createElement("p");
-			line4.innerHTML = description;
+			line4.innerHTML = "<i>" + description + "</i>";
 			item4.appendChild(line4);
 
 			// document.write(JSON.stringify(param));
@@ -157,7 +150,6 @@
 			item5.appendChild(comment);
 			item5.appendChild(like);
 
-			postContainer.appendChild(item0);
 			postContainer.appendChild(item1);
 			postContainer.appendChild(item2);
 			postContainer.appendChild(item3);
