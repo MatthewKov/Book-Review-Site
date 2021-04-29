@@ -19,10 +19,33 @@
 		$statement = $db->prepare($query);
 		$statement->bindValue(':genre', $_GET['genre']);
 	}
-	
+
 	$statement->execute();
 	$post_list = $statement->fetchAll();
 	$statement->closeCursor();
+
+	function addComment($post_id, $username, $comment) {
+		$query = "INSERT INTO comments VALUES (:post_id, :username, :comment)";
+
+		$statement = $db->prepare($query);
+		$statement->bindValue(':post_id', $post_id);
+		$statement->bindValue(':username', $username);
+		$statement->bindValue(':comment', $comment);
+		$statement->execute();
+		$statement->closeCursor();
+	}
+
+	if(isset($_POST['comment_btn'])) {
+		if(!empty(trim($_POST['comment_box']))){
+			$post_id = JSON.parse(JSON.stringify(param[0]));
+			$comment_contents = htmlspecialchars(trim($_POST['comment_box']));
+			addBookToList($post_id, $_SESSION['user'], $comment_contents);
+		}
+		// else {
+		// 	$_POST['err_read'] = "Error: missing field(s)";
+		// }
+	}
+
 ?>
 
 <html>
@@ -119,11 +142,12 @@
 			// line2.innerHTML = genre;
 			// item3.appendChild(line2);
 
-			var item3 = document.createElement("div"); // rating
+			var item3 = document.createElement("div"); // rating +genre
 			item3.className = "item3";
+			var genre = JSON.parse(JSON.stringify(param[4]));
 			var rating = JSON.parse(JSON.stringify(param[5]));
 			var line3 = document.createElement("p");
-			line3.innerHTML = rating + "/5" + "<i class='fas fa-star'></i>";
+			line3.innerHTML = rating + "/5" + "<i class='fas fa-star'></i>   ||   " + genre;
 			item3.appendChild(line3);
 
 			var item4 = document.createElement("div"); // description
@@ -139,15 +163,23 @@
 			item5.className = "item5";
 			var comment = document.createElement("input");
 			comment.placeholder = "type a comment...";
+			comment.name = "comment_box";
+			comment.id = "comment_box";
+			
 			var commentBtn = document.createElement("button");
-			commentBtn.type = "button";
-			commentBtn.id = "submit";
+			commentBtn.type = "submit";
+			commentBtn.textContent = "post"
+			commentBtn.class = "btn btn-primary";
 			commentBtn.className = "btn btn-outline-info";
+			commentBtn.name = "comment_btn";
+			commentBtn.id = "comment_btn";
+
 			var like = document.createElement("i");
 			like.className = "far fa-heart";
 
-			comment.appendChild(commentBtn);
+			// comment.appendChild(commentBtn);
 			item5.appendChild(comment);
+			item5.appendChild(commentBtn);
 			item5.appendChild(like);
 
 			postContainer.appendChild(item1);
