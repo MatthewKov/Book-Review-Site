@@ -167,6 +167,8 @@
 		<meta charset="utf-8">
   		<meta name="viewport" content="width=device-width, initial-scale=1">
   		<title>BookKeeper</title>
+
+  		
   		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
   		<script src="https://kit.fontawesome.com/595acf0be0.js" crossorigin="anonymous"></script>
@@ -187,6 +189,7 @@
 				</div>
 				<div id="bio" contenteditable="true" onkeyup="updateBio()"><?php echo $profile_list['bio']; ?></div>
 				<div>
+					<!-- The ajax link is preventing this button from centering -->
 					<button type="submit" name="update_bio" class="btn btn-secondary center">Update</button>
 					<input type="hidden" id="bio_hidden" name="bio_hidden">
 				</div>
@@ -234,13 +237,14 @@
 			</div>
 		</div>
 
-
+		
 		<script>
 	  		$(function(){
   				$("#nav-placeholder").load("navbar.php");
 			});
 
 			function updateBio() {
+				//bug clears bio when hit without changing anything
 				var bio = document.getElementById('bio').innerHTML;
 				var hidden = document.getElementById('bio_hidden');
 				hidden.value = bio;
