@@ -5,6 +5,7 @@
 	if(!isset($_SESSION['user'])) {
 		header('Location: login.php');
 	}
+	$session_value=(isset($_SESSION['user']))?$_SESSION['user']:''; 
 	require('db_connect.php');
 	
 	function addComment($post_id, $username, $comment) {
@@ -19,6 +20,11 @@
 		$statement->closeCursor();
 	}
 
+	// function addLike(){
+
+	// }
+
+	// comments
 	if(isset($_POST['comment_btn'])) {
 		if(!empty(trim($_POST['comment_box']))){
 			$comment_contents = htmlspecialchars(trim($_POST['comment_box']));
@@ -31,6 +37,19 @@
 		// 	$_POST['err_read'] = "Error: missing field(s)";
 		// }
 	}
+
+	//likes
+	if(isset($_POST['like_btn'])) {
+		echo "here!!!!!!!!";
+		// $comment_contents = htmlspecialchars(trim($_POST['comment_box']));
+		$post_id = htmlspecialchars(trim($_POST['hidden_post_id']));
+		$user_name = $session_value;
+		echo "post_id: " . $post_id;
+		echo "username: " . $user_name;
+		// echo " post id: " . $post_id;
+		// addComment($post_id, $_SESSION['user'], $comment_contents);
+	}
+
 
 	$filter_query = $filter_statement = "";
 	if(!isset($_GET['genre']) || $_GET['genre'] == 'all') {
@@ -145,10 +164,6 @@
 			line1.innerHTML = "<b>" + username + "</b>  reviewed  " + "<b>" + title + "</b>" + "  by  " + "<b>" + author + "</b>";
 			item2.appendChild(line1);
 
-			// var genre = JSON.stringify(param[3]);
-			// var line2 = document.createElement("p");
-			// line2.innerHTML = genre;
-			// item3.appendChild(line2);
 
 			var item3 = document.createElement("div"); // rating +genre
 			item3.className = "item3";
@@ -180,7 +195,6 @@
 			comment.name = "comment_box";
 			comment.id = "comment_box";
 
-
 			var commentBtn = document.createElement("button");
 			var post_id = JSON.parse(JSON.stringify(param[0]));
 			var hidden_post_id = document.createElement("input");
@@ -199,16 +213,33 @@
 			c_lbl.id = "lbl" + post_id;
 			c_lbl.innerHTML = "";
 
+			// LIKE FORM
+			var like_form = document.createElement("form");
+			like_form.name = "like_form";
+			like_form.method = "post";
+
+			var username = "<?php echo $session_value ?>";
+			var like_btn = document.createElement("button");
+			like_btn.name = "like_btn";
+			like_btn.style.border = "none";
+			like_btn.style.backgroundColor = "white"; 
 			var like = document.createElement("i");
+			like_btn.appendChild(like);
+			like_btn.type = "submit";
 			like.className = "far fa-heart";
+			
+			// like_form.appendChild(username);
+			like_form.appendChild(hidden_post_id);
+			// like_form.appendChild();			
 
 			// comment.appendChild(commentBtn);
 			var item0 = document.createElement("div");
-			item0.appendChild(like);
+			item0.appendChild(like_btn);
 			item5.appendChild(comment);
 			item5.appendChild(hidden_post_id);
 			item5.appendChild(commentBtn);
 			comment_form.appendChild(item5);
+			like_form.appendChild(like_btn);
 			item5.appendChild(c_lbl);
 
 			postContainer.appendChild(item0);
@@ -217,6 +248,7 @@
 			postContainer.appendChild(item3);
 			postContainer.appendChild(item4);
 			postContainer.appendChild(comment_form);
+			postContainer.appendChild(like_form);
 			// postContainer.appendChild(item5);
 		}	
 
