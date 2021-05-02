@@ -117,8 +117,9 @@ if (!empty($_POST['title']) && !empty($_POST['author']) && !empty($_POST['rating
 }
 
 #book-img-upload{
-  border: solid black 2px;
+  /*border: solid black 2px;*/
   padding-top:25px;
+  padding-left: 40px;
 }
 
 #outer-shell{
@@ -170,7 +171,7 @@ if (!empty($_POST['title']) && !empty($_POST['author']) && !empty($_POST['rating
   <div class="outer-shell">
   <form action="write_review.php" method="post" onsubmit="return checkInput()">
 	<div class="grid-container">		
-				<div class="item1" id="book-img-upload"><i class="far fa-images fa-2x"></i><br/><input type="file" id="img" name="img" accept="image/*"></div>	
+				<div class="item1" id="book-img-upload"><i class="fas fa-book-reader fa-5x" style="color:#53917E;"></i></div>
 				<div class="item2" id="book-title">
 					<label>Book title: </label>
 					<input type="text" name="title" id="title" autofocus />	
