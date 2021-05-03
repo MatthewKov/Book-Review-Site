@@ -1,6 +1,11 @@
 <!DOCTYPE html>
-<!-- Contributions by Louisa Evola and Matthew Kovalenko-->
+<!-- Contributions by Louisa Evola and Matthew Kovalenkommmmmm-->
 <?php
+	header('Access-Control-Allow-Origin: http://localhost:4200');
+	header('Access-Control-Allow-Headers: X-Requested-With, Content-Type, Origin, Authorization, Accept, Client-Security-Token, Accept-Encoding');
+	header('Access-Control-Max-Age: 1000');
+	header('Access-Control-Allow-Methods: POST, GET, OPTIONS, DELETE, PUT');
+
 	session_start();
 	if(!isset($_SESSION['user'])) {
 		header('Location: login.php');
@@ -27,15 +32,10 @@
 	         <li class="nav-item">
 	          <a id="nav-link" class="nav-link" href="write_review.php" style="font-size: 20px;">write a review</a>
 	        </li>
-	    	<li class="nav-item dropdown">
-	          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 20px;">
-	            my profile
-	          </a>
-	          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-	            <li><a class="dropdown-item" href="profile.php">my posts</a></li>
-	            <li><hr class="dropdown-divider"></li>
-	            <li><a class="dropdown-item" href="profile.php">my bookshelf</a></li>
-	          </ul>
+	    	<li class="nav-item">
+	        <form action="navbar.php" method="post">
+            	<button type="submit" name="profile-link"><a class="dropdown-item">my bookshelf</a></button>
+            </form>
 	        </li>
 	      </ul>
 	      <form action="logout.php" method="get">
@@ -44,6 +44,18 @@
 	    </div>
 	  </div>
 	</nav>
+
+	<?php
+	if(isset($_POST['profile-link'])) {
+		$data = [];
+		// add additional to the response
+		$data[0]['user'] = $_SESSION['user'];
+		// Send response (in json format) back the front end
+		echo json_encode(['content'=>$data]);
+		header('Location: http://localhost:4200/');
+	}
+	?>
+
 </body>
 <!--Popper-->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
