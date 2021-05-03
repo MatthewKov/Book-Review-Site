@@ -1,5 +1,5 @@
-<!-- Contributions by Louisa Evola and Matthew Kovalenko-->
 <?php
+// Contributions by Louisa Evola and Matthew Kovalenko
 
 $hostname = 'usersrv01.cs.virginia.edu';
 
