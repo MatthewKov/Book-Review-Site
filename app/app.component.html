@@ -21,11 +21,10 @@
       <form action="profile.php" name="bio_form" method="post">
         <div id=user>
           <img id="profile-pic" src="../profile-pic.png" alt="" width="100" height="100">
-          <label for="profile-pic">username</label>
+          <label for="profile-pic">{{ user }}</label>
         </div>
         <div [ngStyle]="{'background-color':'lightYellow'}" id="bio" contenteditable="true" onkeyup="updateBio()">bio</div>
         <div>
-          <!-- The ajax link is preventing this button from centering -->
           <button [ngStyle]="{marginLeft: '650px', marginTop: '20px', padding: '11px'}" [ngClass]="['btn', 'btn-primary']" type="submit" name="update_bio">Update</button>
           <input type="hidden" id="bio_hidden" name="bio_hidden">
         </div>

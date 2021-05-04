@@ -36,6 +36,10 @@ export class AppComponent {
 
   addBookToList(form: any): void {
     console.log(form);
+    let params = JSON.stringify(form);
+    this.http.post<any>('http://localhost/book-review-site/add_book.php', params).subscribe(() => {
+
+    });
   }
 
 
