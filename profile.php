@@ -178,9 +178,14 @@
 
 	<body>
 		<header>
-			<div id="nav-placeholder"></div>
+		<div id="nav-placeholder"></div>
 		</header>
-		<?php $var = "var"; ?>
+		<script>
+	  		$(function(){
+  				$("#nav-placeholder").load("navbar.php");
+			});
+  		</script>
+		
 		<div id="person-info">
 			<form action="profile.php" name="bio_form" method="post">
 				<div id=user>
