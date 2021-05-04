@@ -20,24 +20,24 @@
 		$statement->closeCursor();
 	}
 
-	function addLike($post_id, $username){
-		global $db;
-		$query = "INSERT INTO likes VALUES (:post_id, :username)";
+	// function addLike($post_id, $username){
+	// 	global $db;
+	// 	$query = "INSERT INTO likes VALUES (:post_id, :username)";
 
-		$statement = $db->prepare($query);
-		$statement->bindValue(':post_id', $post_id);
-		$statement->bindValue(':username', $username);
-		$statement->execute();
-		$statement->closeCursor();
-	}
+	// 	$statement = $db->prepare($query);
+	// 	$statement->bindValue(':post_id', $post_id);
+	// 	$statement->bindValue(':username', $username);
+	// 	$statement->execute();
+	// 	$statement->closeCursor();
+	// }
 
 	// comments
 	if(isset($_POST['comment_btn'])) {
 		if(!empty(trim($_POST['comment_box']))){
 			$comment_contents = htmlspecialchars(trim($_POST['comment_box']));
 			$post_id = htmlspecialchars(trim($_POST['hidden_post_id']));
-			echo "comment: " . $comment_contents;
-			echo " post id: " . $post_id;
+			// echo "comment: " . $comment_contents;
+			// echo " post id: " . $post_id;
 			addComment($post_id, $_SESSION['user'], $comment_contents);
 		}
 		// else {
@@ -45,18 +45,18 @@
 		// }
 	}
 
-	//likes
-	if(isset($_POST['like_btn'])) {
-		echo "here!!!!!!!!";
-		// $comment_contents = htmlspecialchars(trim($_POST['comment_box']));
-		$post_id2 = htmlspecialchars(trim($_POST['hidden_post_id2']));
-		$user_name = $session_value;
-		echo "post_id: " . $post_id2;
-		echo "username: " . $user_name;
-		addLike($post_id2, $user_name);
-		// echo " post id: " . $post_id;
-		// addComment($post_id, $_SESSION['user'], $comment_contents);
-	}
+	// //likes
+	// if(isset($_POST['like_btn'])) {
+	// 	echo "here!!!!!!!!";
+	// 	// $comment_contents = htmlspecialchars(trim($_POST['comment_box']));
+	// 	$post_id2 = htmlspecialchars(trim($_POST['hidden_post_id2']));
+	// 	$user_name = $session_value;
+	// 	echo "post_id: " . $post_id2;
+	// 	echo "username: " . $user_name;
+	// 	addLike($post_id2, $user_name);
+	// 	// echo " post id: " . $post_id;
+	// 	// addComment($post_id, $_SESSION['user'], $comment_contents);
+	// }
 
 
 	$filter_query = $filter_statement = "";
@@ -81,12 +81,12 @@
 	$comment_list = $comment_statement->fetchAll();
 	$comment_statement->closeCursor();
 
-	$like_query = "SELECT * FROM likes";
-	$like_statement = $db->prepare($like_query);
-	// $comment_statement->bindValue(':usr', $_SESSION['user']);
-	$like_statement->execute();
-	$like_list = $like_statement->fetchAll();
-	$like_statement->closeCursor();
+	// $like_query = "SELECT * FROM likes";
+	// $like_statement = $db->prepare($like_query);
+	// // $comment_statement->bindValue(':usr', $_SESSION['user']);
+	// $like_statement->execute();
+	// $like_list = $like_statement->fetchAll();
+	// $like_statement->closeCursor();
 ?>
 
 <html>
@@ -227,37 +227,37 @@
 			c_lbl.id = "lbl" + post_id;
 			c_lbl.innerHTML = "";
 
-			// LIKE FORM
-			var like_form = document.createElement("form");
-			like_form.name = "like_form";
-			like_form.method = "post";
-			var username = "<?php echo $session_value ?>";
-			var like_btn = document.createElement("button");
-			like_btn.name = "like_btn";
-			like_btn.style.border = "none";
-			like_btn.style.backgroundColor = "white"; 
-			var like = document.createElement("i");
-			like_btn.appendChild(like);
-			like_btn.type = "submit";
-			like.className = "far fa-heart";
-			like.id = "heart" + post_id;
+			// // LIKE FORM
+			// var like_form = document.createElement("form");
+			// like_form.name = "like_form";
+			// like_form.method = "post";
+			
+			// var like_btn = document.createElement("button");
+			// like_btn.name = "like_btn";
+			// like_btn.style.border = "none";
+			// like_btn.style.backgroundColor = "white"; 
+			// var like = document.createElement("i");
+			// like_btn.appendChild(like);
+			// like_btn.type = "submit";
+			// like.className = "far fa-heart";
+			// like.id = "heart" + post_id;
 
 			var hidden_post_id2 = document.createElement("input");
 			hidden_post_id2.type = "hidden";
 			hidden_post_id2.name = "hidden_post_id2";
 			hidden_post_id2.value = post_id;
 			// like_form.appendChild(username);
-			like_form.appendChild(hidden_post_id2);
+			// like_form.appendChild(hidden_post_id2);
 			// like_form.appendChild();			
 
 			// comment.appendChild(commentBtn);
 			var item0 = document.createElement("div");
-			item0.appendChild(like_btn);
+			// item0.appendChild(like_btn);
 			item5.appendChild(comment);
 			item5.appendChild(hidden_post_id);
 			item5.appendChild(commentBtn);
 			comment_form.appendChild(item5);
-			like_form.appendChild(like_btn);
+			// like_form.appendChild(like_btn);
 			item5.appendChild(c_lbl);
 
 			postContainer.appendChild(item0);
@@ -266,7 +266,7 @@
 			postContainer.appendChild(item3);
 			postContainer.appendChild(item4);
 			postContainer.appendChild(comment_form);
-			postContainer.appendChild(like_form);
+			// postContainer.appendChild(like_form);
 			// postContainer.appendChild(item5);
 		}	
 
@@ -285,12 +285,12 @@
 
 		}
 
-		function load_likes(param){
-			var id = JSON.parse(JSON.stringify(param["post_id"]));
-			var n = 'heart' + id + '';
-			var heart = document.getElementById(n);
-			heart.color = "red";
-		}
+		// function load_likes(param){
+		// 	var id = JSON.parse(JSON.stringify(param["post_id"]));
+		// 	var n = 'heart' + id + '';
+		// 	var heart = document.getElementById(n);
+		// 	heart.color = "red";
+		// }
 
 </script>
 		<?php
@@ -304,11 +304,11 @@
 						load_comments(' . json_encode($comment) . ');
 					   </script>';
 			}
-			foreach($like_list as $like) {
-				echo '<script type="text/javascript">
-						load_comments(' . json_encode($like) . ');
-					   </script>';
-			}
+			// foreach($like_list as $like) {
+			// 	echo '<script type="text/javascript">
+			// 			load_comments(' . json_encode($like) . ');
+			// 		   </script>';
+			// }
 ?>
 		
 	<script>
