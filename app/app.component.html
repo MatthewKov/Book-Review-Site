@@ -34,21 +34,22 @@
 
     <div id="bookshelf" class="flex-container">
       <div class="flex-child">
-        <form action="profile.php" name="read_form" method="post">
+        <form #read_form="ngForm" (ngSubmit)="addBookToList(read_form.value)">
           <h4>Books I've read</h4>
           <ul id="books_read">
             <li *ngFor="let book of booksRead">{{ book.title }} by {{ book.author }}</li>
           </ul>
-          <input id="title_read" name="title_read" type="text" placeholder="Add a book"> & <input id="author_read" name="author_read" type="text" placeholder="Add author">
-          <button id="add_read" name="add_read" class="btn btn-primary" type="submit">Add to list</button>
+          <input [(ngModel)]="newBookRead.title" required name="title_read" type="text" placeholder="Add a book"> & <input [(ngModel)]="newBookRead.author" name="author_read" type="text" placeholder="Add author">
+          <button class="btn btn-primary" type="submit">Add to list</button>
           <div><span class="error_message" id="err_read">error</span></div>
+          <input [(ngModel)]="newBookRead.list" name="list_read" type="hidden">
         </form>
       </div>
       <div class="flex-child">
         <h4>Books I want to read</h4>
         <form action="profile.php" method="post">
           <ul id="books_to_read">
-
+            <li *ngFor="let book of booksToRead">{{ book.title }} by {{ book.author }}</li>
           </ul>
         </form>
         <form action="profile.php" name="to_read_form" method="post">
@@ -58,13 +59,6 @@
         </form>
       </div>
     </div>
-
-    <p>test {{ book1.title }} </p>
-    <p>user: {{ user }} </p>
-    <!-- <button class="btn btn-primary"
-          (click)="getUser(orderForm.value)"
-          title="always enabled">Send to another PHP</button> -->
-    <p>{{ booksRead }}</p>
 
     
     <script>

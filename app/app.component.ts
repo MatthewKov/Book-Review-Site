@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http'
 import { SESSION_STORAGE, StorageService, StorageTranscoders } from 'ngx-webstorage-service';
 import { Inject, Injectable } from '@angular/core';
 import { Book } from './book';
+//import { AppRoutingModule } from './app-routing.module';
 
 @Component({
   selector: 'app-root',
@@ -20,16 +21,23 @@ export class AppComponent {
   booksRead = [];
   booksToRead = [];
 
+  user = '';
+
   ngOnInit() {
+    this.user = window.location.href.substring(28);
+
   	this.http.post<any>('http://localhost/book-review-site/profile_load.php', null).subscribe((data) => {
   		this.booksRead = data['content'][0].booksRead;
   		this.booksToRead = data['content'][0].booksToRead;
   	});
   }
 
-  book1 = new Book("harry potter", "jk rowling");
+  newBookRead = new Book('', '', 'books_read');
 
-  user = "";
+  addBookToList(form: any): void {
+    console.log(form);
+  }
+
 
   getUser(form: any): void {
   	let params = JSON.stringify(form);
