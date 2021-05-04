@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Contributions by Louisa Evola and Matthew Kovalenkommmmmm-->
+<!-- Contributions by Louisa Evola and Matthew Kovalenko-->
 <?php
 	header('Access-Control-Allow-Origin: http://localhost:4200');
 	header('Access-Control-Allow-Headers: X-Requested-With, Content-Type, Origin, Authorization, Accept, Client-Security-Token, Accept-Encoding');
@@ -52,7 +52,7 @@
 		$data[0]['user'] = $_SESSION['user'];
 		// Send response (in json format) back the front end
 		echo json_encode(['content'=>$data]);
-		header('Location: http://localhost:4200/');
+		header('Location: http://localhost:4200?user=' . $_SESSION['user']);
 	}
 	?>
 
